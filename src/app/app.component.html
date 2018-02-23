@@ -1,0 +1,57 @@
+<div>
+  <nav>
+    <ul class="menu">
+      <li>меню 1</li>
+      <li>меню 2</li>
+      <li>меню 3</li>
+      <li>меню 4</li>
+      <li>меню 5</li>
+    </ul>
+  </nav>
+
+  <table>
+    <tr>
+      <th>title</th>
+      <th>description</th>
+      <th>estimate</th>
+      <th>create_date</th>
+      <th>status</th>
+    </tr>
+    <tr class="tr" *ngFor=" let item of listItem" >
+      <td *ngIf="item" [ngSwitch]="item.priority">
+        <ng-template ngSwitchCase="0">Низкий</ng-template>
+        <ng-template ngSwitchCase="10">Средний</ng-template>
+        <ng-template ngSwitchCase="20">Высокий</ng-template>
+      </td>
+      <td *ngIf="item">{{item.title}}</td>
+      <td *ngIf="item">{{item.description}}</td>
+      <td *ngIf="item">{{item.estimate}}</td>
+      <td *ngIf="item">{{item.create_date}}</td>
+      <td *ngIf="item" [ngSwitch]="item.state">
+        <ng-template ngSwitchCase="0">Новая</ng-template>
+        <ng-template ngSwitchCase="10">В работе</ng-template>
+        <ng-template ngSwitchCase="20">Закрыта</ng-template>
+        <ng-template ngSwitchCase="30">Отменена</ng-template>
+      </td>
+    </tr>
+  </table>
+
+  <input type="submit" value="prev" (click)="prevData()" [disabled]="firstPage()">
+  <span>{{page}}</span>
+  <input type="submit" value="next" (click)="nextData()"  [disabled]="lastPage()">
+    <select name="limit" [(ngModel)]="limit" (click)="getListItem( page , limit)">
+      <option [value]="5" >5</option>
+      <option [value]="10">10</option>
+      <option [value]="25">25</option>
+    </select>
+
+
+  <div class="controlbar">
+    <input type="button" value="Добавить">
+  </div>
+</div>
+
+
+
+
+
