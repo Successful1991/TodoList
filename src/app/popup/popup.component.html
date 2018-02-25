@@ -1,0 +1,14 @@
+<form action="#" name="addItems" #heroForm="ngForm" (ngSubmit)="addItem(this)" id="addItems">
+    <label for="priority">приоритет
+      <select [(ngModel)]="items.priority" name="priority" required id="priority">
+        <option value="0">Низкий</option>
+        <option value="10">Средний</option>
+        <option value="20">Высокий</option>
+      </select></label>
+    <label for="title">название <input type="text" [(ngModel)]="items.title" value="название" id="title" name="title" required></label>
+    <label for="description">описание <textarea type="text" [(ngModel)]="items.description" name="description" id="description"></textarea></label>
+    <label for="estimate">стоимость <input type="number" [(ngModel)]="items.estimate" name="estimate" id="estimate" value="стоимость" min="0" max="1000000" required></label>
+    <br>
+    <input type="submit" value="submit" [disabled]="!heroForm.form.valid"  >
+  </form>
+

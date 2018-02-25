@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {DataComponent} from "./data/data.component";
 
+
+import { Item} from "./popup/item";
+
+
+
 @Component ({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -46,6 +51,18 @@ export class AppComponent implements OnInit{
     let lastPage = Math.ceil(this.messages.length/this.limit);
     return this.page === lastPage ? true : false ;
   }
+
+
+
+
+
+  items = new Item (
+    0, 'имя', 'описание', 0, new Date, 0
+  );
+  addItem(form) {
+    console.log(form);
+  }
+
 
 
 }

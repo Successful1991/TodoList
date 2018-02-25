@@ -10,12 +10,13 @@
   </nav>
 
   <table>
-    <tr>
-      <th>title</th>
-      <th>description</th>
-      <th>estimate</th>
-      <th>create_date</th>
-      <th>status</th>
+    <tr class="tr">
+      <th>приоритет</th>
+      <th>название</th>
+      <th>описание</th>
+      <th>стоимость</th>
+      <th>дата создания</th>
+      <th>статус</th>
     </tr>
     <tr class="tr" *ngFor=" let item of listItem" >
       <td *ngIf="item" [ngSwitch]="item.priority">
@@ -47,11 +48,31 @@
 
 
   <div class="controlbar">
-    <input type="button" value="Добавить">
+      <ng-template #popTemplate >
+        <app-popup></app-popup>
+        <!--<form action="#" name="addItems" #heroForm="ngForm" (ngSubmit)="addItem(this)" id="addItems">-->
+          <!--<label for="priority">приоритет-->
+            <!--<select [(ngModel)]="items.priority" name="priority" required id="priority">-->
+              <!--<option value="0">Низкий</option>-->
+              <!--<option value="10">Средний</option>-->
+              <!--<option value="20">Высокий</option>-->
+            <!--</select></label>-->
+          <!--<label for="title">название <input type="text" [(ngModel)]="items.title" value="название" id="title" name="title" required></label>-->
+          <!--<label for="description">описание <textarea type="text" [(ngModel)]="items.description" name="description" id="description"></textarea></label>-->
+          <!--<label for="estimate">стоимость <input type="number" [(ngModel)]="items.estimate" name="estimate" id="estimate" value="стоимость" min="0" max="1000000" required></label>-->
+          <!--<br>-->
+          <!--<input type="submit" value="submit" [disabled]="!heroForm.form.valid" (click)="pop.hide()" >-->
+        <!--</form>-->
+      </ng-template>
+
+    <button type="button" class="btn btn-primary popup"
+            [popover]="popTemplate"
+            [outsideClick]="true"
+            #pop="bs-popover">
+      Добавить
+    </button>
   </div>
 </div>
-
-
 
 
 

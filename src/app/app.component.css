@@ -1,3 +1,7 @@
+:host >>> #addItems{
+  display: flex!important;
+  flex-direction: column;
+}
 .menu{
   display: flex;
   justify-content: center;
@@ -32,6 +36,9 @@ td{
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
 }
+th{
+  text-align: center;
+}
 .controlbar{
   width: 100%;
   height: 150px;
@@ -39,4 +46,22 @@ td{
   padding: 30px;
 }
 
+
+:host >>> .popover {
+  display: flex;
+  position: absolute!important;
+  top: calc( 50% - 288px )!important;
+  left: calc( 50% - 384px )!important;
+  width: 768px;
+  max-width: 100%;
+  height: 576px;
+  background: #0ec5ee;
+}
+:host >>> .popover-content{
+  height: 300px;
+  width: 500px;
+}
+:host >>> .popover-arrow.arrow{
+  display: none;
+}
 
