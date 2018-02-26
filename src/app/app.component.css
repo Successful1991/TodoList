@@ -47,19 +47,20 @@ th{
 }
 
 
-:host >>> .popover {
-  display: flex;
+.dialog{
+  display: flex!important;
   position: absolute!important;
   top: calc( 50% - 288px )!important;
   left: calc( 50% - 384px )!important;
-  width: 768px;
-  max-width: 100%;
-  height: 576px;
+  width: 768px!important;
+  max-width: 100% !important;
+  height: 576px!important;
   background: #0ec5ee;
 }
-:host >>> .popover-content{
-  height: 300px;
-  width: 500px;
+:host >>> .modal-content{
+  height: 576px!important;
+  width: 768px!important;
+  background: green!important;
 }
 :host >>> .popover-arrow.arrow{
   display: none;

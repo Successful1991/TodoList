@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DataComponent} from "./data/data.component";
-
-
-import { Item} from "./popup/item";
-
-
+import {PopupService} from "./popup/popup.service";
+import {AppService} from "./app.service";
 
 @Component ({
   selector: 'app-root',
@@ -12,59 +8,40 @@ import { Item} from "./popup/item";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  constructor( private dataComponent:DataComponent) {}
-
-  messages = [];
-  listItem = [];
 
   page = 1;
-  limit = 5;
+  limit:number = 5;
+  listItem = [];
+  dellete:boolean = false;
 
+  constructor(public popupService:PopupService,
+              private appService:AppService
+  ) {}
 
   ngOnInit() {
-    this.messages = this.dataComponent.listDate;
-    console.log(this.messages);
-    this.getListItem( this.page , this.limit);
+    this.listItem = this.appService.getData( this.page , this.limit);
   }
-
-  getListItem( page , limit) {
-    this.listItem = [];
-    let res = (page*limit)-limit;
-    for (let i = 0; i <limit ; i++ ) {
-      this.listItem.push(this.messages[res++]);
-    }
+  getListItem(){
+    this.page = 1;
+    this.listItem = this.appService.getListItem(this.page, this.limit);
   }
-
   nextData(){
     this.page +=1;
-    this.getListItem( this.page , this.limit);
+    console.log('nextData',typeof (this.page) , typeof (this.limit));
+    this.listItem = this.appService.nextData(this.page , this.limit);
   }
   prevData(){
     this.page -=1;
-    this.getListItem( this.page , this.limit);
+    this.listItem = this.appService.prevData(this.page , this.limit);
   }
-
   firstPage() {
-    return this.page === 1 ? true : false ;
+    return this.appService.firstPage(this.page);
   }
   lastPage() {
-    let lastPage = Math.ceil(this.messages.length/this.limit);
-    return this.page === lastPage ? true : false ;
+    return this.appService.lastPage(this.page , this.limit);
   }
 
-
-
-
-
-  items = new Item (
-    0, 'имя', 'описание', 0, new Date, 0
-  );
-  addItem(form) {
-    console.log(form);
-  }
-
-
-
+  del(){}
 }
 
 

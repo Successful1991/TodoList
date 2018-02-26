@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item} from "./item";
+import { BsModalRef} from "ngx-bootstrap";
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'app-popup',
@@ -7,32 +9,24 @@ import { Item} from "./item";
   styleUrls: ['./popup.component.css']
 })
 export class PopupComponent implements OnInit {
-  // priority;
-  // title;
-  // description;
-  // estimate;
-  // create_date;
-  // state = 0;
-  constructor() { }
-  // items = new Item (
-  //   this.priority,
-  //   this.title,
-  //   this.description ,
-  //   this.estimate,
-  //   this.create_date,
-  //   this.state
-  // );
+  constructor(public bsModalRef:BsModalRef,
+              private appService:AppService) { }
+
   items = new Item (
-    0, 'имя', 'описание', 0, new Date, 0
+    0, 'имя', 'описание', 0, new Date , 0
   );
 
   ngOnInit() {
   }
   addItem(form) {
-    console.log(form);
-
+    if(form.items){
+      this.appService.addItem(form.items);
+    }
   }
+
+
 }
+
 
 
 

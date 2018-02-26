@@ -11,6 +11,7 @@
 
   <table>
     <tr class="tr">
+      <th *ngIf="dellete">удалить</th>
       <th>приоритет</th>
       <th>название</th>
       <th>описание</th>
@@ -19,6 +20,7 @@
       <th>статус</th>
     </tr>
     <tr class="tr" *ngFor=" let item of listItem" >
+      <td *ngIf="dellete"><input type="checkbox"></td>
       <td *ngIf="item" [ngSwitch]="item.priority">
         <ng-template ngSwitchCase="0">Низкий</ng-template>
         <ng-template ngSwitchCase="10">Средний</ng-template>
@@ -27,12 +29,18 @@
       <td *ngIf="item">{{item.title}}</td>
       <td *ngIf="item">{{item.description}}</td>
       <td *ngIf="item">{{item.estimate}}</td>
-      <td *ngIf="item">{{item.create_date}}</td>
+      <td *ngIf="item">{{item.create_date | date:'y-M-d'}} <br> {{item.create_date | date:'hh:mm:ss'}}</td>
       <td *ngIf="item" [ngSwitch]="item.state">
-        <ng-template ngSwitchCase="0">Новая</ng-template>
-        <ng-template ngSwitchCase="10">В работе</ng-template>
-        <ng-template ngSwitchCase="20">Закрыта</ng-template>
-        <ng-template ngSwitchCase="30">Отменена</ng-template>
+        <select name="limit" [(ngModel)]="item.state">
+          <option [value]="0" >Новая</option>
+          <option [value]="10">работе</option>
+          <option [value]="20">Закрыта</option>
+          <option [value]="30">Отменена</option>
+        </select>
+        <!--<ng-template ngSwitchCase="0">Новая</ng-template>-->
+        <!--<ng-template ngSwitchCase="10">В работе</ng-template>-->
+        <!--<ng-template ngSwitchCase="20">Закрыта</ng-template>-->
+        <!--<ng-template ngSwitchCase="30">Отменена</ng-template>-->
       </td>
     </tr>
   </table>
@@ -40,39 +48,21 @@
   <input type="submit" value="prev" (click)="prevData()" [disabled]="firstPage()">
   <span>{{page}}</span>
   <input type="submit" value="next" (click)="nextData()"  [disabled]="lastPage()">
-    <select name="limit" [(ngModel)]="limit" (click)="getListItem( page , limit)">
-      <option [value]="5" >5</option>
+    <select name="limit" [(ngModel)]="limit" (click)="getListItem()">
+      <option [value]="5">5</option>
       <option [value]="10">10</option>
       <option [value]="25">25</option>
     </select>
 
 
   <div class="controlbar">
-      <ng-template #popTemplate >
-        <app-popup></app-popup>
-        <!--<form action="#" name="addItems" #heroForm="ngForm" (ngSubmit)="addItem(this)" id="addItems">-->
-          <!--<label for="priority">приоритет-->
-            <!--<select [(ngModel)]="items.priority" name="priority" required id="priority">-->
-              <!--<option value="0">Низкий</option>-->
-              <!--<option value="10">Средний</option>-->
-              <!--<option value="20">Высокий</option>-->
-            <!--</select></label>-->
-          <!--<label for="title">название <input type="text" [(ngModel)]="items.title" value="название" id="title" name="title" required></label>-->
-          <!--<label for="description">описание <textarea type="text" [(ngModel)]="items.description" name="description" id="description"></textarea></label>-->
-          <!--<label for="estimate">стоимость <input type="number" [(ngModel)]="items.estimate" name="estimate" id="estimate" value="стоимость" min="0" max="1000000" required></label>-->
-          <!--<br>-->
-          <!--<input type="submit" value="submit" [disabled]="!heroForm.form.valid" (click)="pop.hide()" >-->
-        <!--</form>-->
-      </ng-template>
-
-    <button type="button" class="btn btn-primary popup"
-            [popover]="popTemplate"
-            [outsideClick]="true"
-            #pop="bs-popover">
-      Добавить
-    </button>
+  <button type="button" class="btn btn-primary" (click)="this.popupService.openModalWithComponent()">Добавить</button>
+    <button type="button" (click)="dellete = !dellete" *ngIf="!dellete">выбрать</button>
+    <button type="button" (click)="dellete = !dellete" *ngIf="dellete">отмена</button>
+    <button type="button" (click)="del()" *ngIf="dellete">удалить2</button>
   </div>
 </div>
+
 
 
 

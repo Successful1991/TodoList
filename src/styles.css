@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+.dialog{
+  display: flex!important;
+  position: absolute!important;
+  top: calc( 50% - 288px )!important;
+  left: calc( 50% - 384px )!important;
+  width: 768px!important;
+  max-width: 100% !important;
+  height: 576px!important;
+  background: #0ec5ee;
+}/* You can add global styles to this file, and also import other style files */

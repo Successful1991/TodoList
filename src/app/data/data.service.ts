@@ -1,16 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.css']
-})
-export class DataComponent implements OnInit {
+@Injectable()
+export class DataService {
 
   constructor() { }
-
-  ngOnInit() {
-  }
   listDate = [
     {
       create_date: '2017-08-30 20:29:33',
@@ -357,6 +350,4 @@ export class DataComponent implements OnInit {
       priority: 20
     }
   ];
-
-
 }

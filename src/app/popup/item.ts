@@ -4,7 +4,7 @@ export class Item {
     public title:string,
     public description:string,
     public estimate:number,
-    public create_date:Date,
+    public create_date: Date,
     public state:number
   ) { }
 }
