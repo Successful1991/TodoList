@@ -11,7 +11,7 @@
 
   <table>
     <tr class="tr">
-      <th *ngIf="dellete">удалить</th>
+      <th *ngIf="delItem">удалить</th>
       <th>приоритет</th>
       <th>название</th>
       <th>описание</th>
@@ -19,8 +19,9 @@
       <th>дата создания</th>
       <th>статус</th>
     </tr>
+
     <tr class="tr" *ngFor=" let item of listItem" >
-      <td *ngIf="dellete"><input type="checkbox"></td>
+      <td *ngIf="delItem"><input type="checkbox" [(ngModel)]="item.checked" ></td>
       <td *ngIf="item" [ngSwitch]="item.priority">
         <ng-template ngSwitchCase="0">Низкий</ng-template>
         <ng-template ngSwitchCase="10">Средний</ng-template>
@@ -31,23 +32,19 @@
       <td *ngIf="item">{{item.estimate}}</td>
       <td *ngIf="item">{{item.create_date | date:'y-M-d'}} <br> {{item.create_date | date:'hh:mm:ss'}}</td>
       <td *ngIf="item" [ngSwitch]="item.state">
-        <select name="limit" [(ngModel)]="item.state">
+        <select name="limit" [(ngModel)]="item.state" (click)="newStatus();">
           <option [value]="0" >Новая</option>
           <option [value]="10">работе</option>
           <option [value]="20">Закрыта</option>
           <option [value]="30">Отменена</option>
         </select>
-        <!--<ng-template ngSwitchCase="0">Новая</ng-template>-->
-        <!--<ng-template ngSwitchCase="10">В работе</ng-template>-->
-        <!--<ng-template ngSwitchCase="20">Закрыта</ng-template>-->
-        <!--<ng-template ngSwitchCase="30">Отменена</ng-template>-->
       </td>
     </tr>
   </table>
 
-  <input type="submit" value="prev" (click)="prevData()" [disabled]="firstPage()">
+  <input type="submit" value="prev" (click)="prevPage()" [disabled]="firstPage()">
   <span>{{page}}</span>
-  <input type="submit" value="next" (click)="nextData()"  [disabled]="lastPage()">
+  <input type="submit" value="next" (click)="nextPage()"  [disabled]="lastPage()">
     <select name="limit" [(ngModel)]="limit" (click)="getListItem()">
       <option [value]="5">5</option>
       <option [value]="10">10</option>
@@ -57,12 +54,9 @@
 
   <div class="controlbar">
   <button type="button" class="btn btn-primary" (click)="this.popupService.openModalWithComponent()">Добавить</button>
-    <button type="button" (click)="dellete = !dellete" *ngIf="!dellete">выбрать</button>
-    <button type="button" (click)="dellete = !dellete" *ngIf="dellete">отмена</button>
-    <button type="button" (click)="del()" *ngIf="dellete">удалить2</button>
+    <button type="button" (click)="delItem = !delItem" *ngIf="!delItem">выбрать</button>
+    <button type="button" (click)="delItem = !delItem" *ngIf="delItem">отмена</button>
+    <button type="button" (click)="del()" *ngIf="delItem">удалить2</button>
   </div>
 </div>
-
-
-
 

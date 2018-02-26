@@ -16,36 +16,62 @@ export class AppService {
 
   addItem(items){
     this.messages.unshift(items);
+    this.setData(this.messages);
   }
   setData(data){
-    this.http.post('./data/data.service.ts', data );
+    this.http.put('./data/data.service.ts', data );
   }
-
-  getData(page , limit) {
+  getData(page , limit){
     this.messages = this.dataService.listDate;
-    this.messages.forEach( (item, i ) => item.id = i);
-    return this.getListItem( page , limit);
+    this.dataAddId();
+    return this.getListItem(page, limit);
+  };
+  dataAddId() {
+    this.messages.forEach( (item, i ) => {
+      item.id = i;
+      item.checked = false;
+    });
   }
 
   getListItem( page , limit) {
+    this.page = +page;
+    this.limit = +limit;
+
     let start = (page*limit)-limit;
     let end = +limit + start;
+
     this.listItem  = this.messages.slice(start, end);
     return this.listItem;
   }
 
-  nextData(page , limit){
-    return this.getListItem( page , limit);
-  }
-  prevData(page , limit){
-    return this.getListItem( page , limit);
+  nextPage(page){
+    return this.getListItem( page , this.limit);
   }
 
-  firstPage(page ) {
-    return page === 1 ? true : false ;
+  prevPage(page){
+    return this.getListItem( page, this.limit);
   }
-  lastPage(page , limit) {
-    let lastPage = Math.ceil(this.messages.length/limit);
-    return page === lastPage ? true : false ;
+
+  firstPage() {
+    return this.page === 1 ? true : false;
   }
+
+  lastPage() {
+    let lastPage = Math.ceil(this.messages.length/this.limit);
+    return this.page === lastPage ? true : false ;
+  }
+
+  delItem(){
+    this.messages.forEach( message => {
+      if(message.checked){
+        this.messages.splice(message.id,1);
+      }
+    });
+    this.dataAddId();
+    this.setData(this.messages);
+    return this.getListItem( this.page , this.limit);
+  }
+  newStatus(){
+    this.setData(this.messages);
+  };
 }
