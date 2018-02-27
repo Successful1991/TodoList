@@ -57,11 +57,8 @@ export class AppService {
 
 
   delItem(){
-    this.messages.forEach( message => {
-      if(message.checked){
-        this.messages.splice(message.id,1);
-      }
-    });
+    let message = this.messages.filter(mes=>mes.checked!==true);
+    this.messages = message;
     this.dataAddId();
     this.setData(this.messages);
     return this.getListItem( this.page , this.limit);

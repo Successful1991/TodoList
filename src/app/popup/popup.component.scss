@@ -1,13 +1,84 @@
 #addItems{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 768px!important;
   max-width: 100% !important;
   height: 576px!important;
-  position: absolute!important;
-  left: calc( 50% - 383px )!important;
-  background: #0ec5ee;
+  background: url("../../assets/img/christian-perner-329584-unsplash.png") center center no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  outline: 1px solid #9294a4;
+}
+.popup__header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  position: relative;
+  margin-bottom: 50px;
+  .close{
+    position: absolute;
+    right: 15px;
+  }
+}
+.popup__form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.form-pattern{
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 1px 5px 1px #3e3e3e;
+  padding: 2px 10px;
+}
+#title{
+  @extend .form-pattern;
+  width: 160px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#description{
+  @extend .form-pattern;
+  width: 630px;
+  height: 240px;
+}
+#priority{
+  @extend .form-pattern;
+  width: 120px;
+  padding-left: 15px;
   box-sizing: border-box;
 }
+#estimate{
+  @extend .form-pattern;
+}
+#submit{
+  @extend .form-pattern;
+  width: 160px;
+  background: #ffffff;
+}
+.form__row{
+  display: flex;
+  justify-content: flex-start;
+  width: 630px;
+  margin-bottom: 20px;
+  &-label{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    text-transform: capitalize;
+    line-height: 30px;
+  }
+}
+.valid__info{
+  color: red;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-style: italic;
+}
+

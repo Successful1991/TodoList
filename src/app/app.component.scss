@@ -3,11 +3,14 @@
   src: url("../assets/fonts/nairi.otf ");
 }
 .body{
-  margin: 100px;
   width: 1024px;
   height: 768px;
   background:linear-gradient(180deg, #bfc2c3, #9294a4);
+  position: absolute;
+  top: calc( 50% - 384px );
+  left: calc( 50% - 512px );
   padding: 30px;
+  margin: 0 auto;
   font-family: Calibri;
 }
 

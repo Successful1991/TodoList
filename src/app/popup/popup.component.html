@@ -1,20 +1,24 @@
-<form action="#" name="addItems" #heroForm="ngForm" (ngSubmit)="addItem(this)" id="addItems">
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Добавте заметку</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+<form action="#" name="addItems" #heroForm="ngForm" (ngSubmit)="addItem(this)" id="addItems" >
+  <div class="popup__header">
+    <h4 class="modal-title">Добавте заметку</h4>
+    <button type="button" class="close " aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <label for="priority">приоритет
-      <select [(ngModel)]="items.priority" name="priority" required id="priority">
+  <div class="popup__form">
+    <label for="title"><input type="text" [(ngModel)]="items.title" placeholder="название" id="title" name="title" required></label>
+    <label for="description"><textarea type="text" [(ngModel)]="items.description" name="description" id="description" placeholder="описание"></textarea></label>
+
+    <div class="form__row">
+      <label for="priority" class="form__row-label">приоритет <select [(ngModel)]="items.priority" name="priority" required id="priority">
         <option value="0">Низкий</option>
         <option value="10">Средний</option>
         <option value="20">Высокий</option>
       </select></label>
-    <label for="title">название <input type="text" [(ngModel)]="items.title" value="название" id="title" name="title" required></label>
-    <label for="description">описание <textarea type="text" [(ngModel)]="items.description" name="description" id="description"></textarea></label>
-    <label for="estimate">стоимость <input type="number" [(ngModel)]="items.estimate" name="estimate" id="estimate" value="стоимость" min="0" max="1000000" required></label>
-    <br>
-    <input type="submit" value="submit" [disabled]="!heroForm.form.valid"  (click)="bsModalRef.hide()">
+      <label for="estimate" class="form__row-label">стоимость <input type="number" [(ngModel)]="items.estimate" name="estimate" id="estimate" value="стоимость" min="0" max="1000000" required></label>
+    </div>
+    <p *ngIf="!heroForm.form.valid" class="valid__info" >*заполните все поля</p>
+    <input type="submit" value="Добавить" id="submit"  [disabled]="!heroForm.form.valid"  (click)="bsModalRef.hide()">
+  </div>
 </form>
 

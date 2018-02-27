@@ -13,7 +13,7 @@ export class PopupComponent implements OnInit {
               private appService:AppService) { }
 
   items = new Item (
-    0, 'имя', 'описание', 0, new Date , 0
+    0, '', '', 0, new Date , 0
   );
 
   ngOnInit() {

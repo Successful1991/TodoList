@@ -32,7 +32,7 @@
       </td>
       <td class=" item item__title" *ngIf="item">{{item.title}}</td>
       <td class=" item item__description" *ngIf="item">{{item.description}}</td>
-      <td class=" item item__checked" *ngIf="delItem"><input type="checkbox" [(ngModel)]="item.checked" ></td>
+      <td class=" item item__checked" *ngIf="delItem"><input type="checkbox" [(ngModel)]="item.checked" >{{item.checked}}</td>
       <td class=" item item__estimate" *ngIf="item">{{item.estimate}}</td>
       <td class=" item item__create_date" *ngIf="item"> <p>{{item.create_date | date:'y-MM-d'}}</p> <p>{{item.create_date | date:'hh:mm:ss'}}</p></td>
       <td class=" item item__state" *ngIf="item" [ngSwitch]="item.state">
