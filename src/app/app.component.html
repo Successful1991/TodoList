@@ -1,37 +1,41 @@
-<div>
-  <nav>
-    <ul class="menu">
-      <li>меню 1</li>
-      <li>меню 2</li>
-      <li>меню 3</li>
-      <li>меню 4</li>
-      <li>меню 5</li>
-    </ul>
-  </nav>
+<div class="body">
+  <div class="menu">
+    <!--<ul class="menu">-->
+      <!--<li>меню 1</li>-->
+      <!--<li>меню 2</li>-->
+      <!--<li>меню 3</li>-->
+      <!--<li>меню 4</li>-->
+      <!--<li>меню 5</li>-->
+    <!--</ul>-->
+    <button type="button" class="btn btn-primary btn__add" (click)="this.popupService.openModalWithComponent()">Добавить
+      <img src="../assets/img/icons8.png" alt="" class="btn__add-img"></button>
+    <button type="button" (click)="delItem = !delItem" *ngIf="!delItem" class="nav__btn">выбрать<img src="../assets/img/iconmonstr-check-mark-17.svg" alt="" class="btn__add-img"></button>
+    <button type="button" (click)="delItem = !delItem" *ngIf="delItem" class="nav__btn">отмена<img src="../assets/img/iconmonstr-undo-2.svg" alt="" class="btn__add-img"></button>
+    <button type="button" (click)="del()" *ngIf="delItem" class="nav__btn">удалить<img src="../assets/img/iconmonstr-trash-can-2.svg" alt="" class="btn__add-img"></button>
+  </div>
 
-  <table>
-    <tr class="tr">
-      <th *ngIf="delItem">удалить</th>
-      <th>приоритет</th>
-      <th>название</th>
-      <th>описание</th>
-      <th>стоимость</th>
-      <th>дата создания</th>
-      <th>статус</th>
-    </tr>
-
-    <tr class="tr" *ngFor=" let item of listItem" >
-      <td *ngIf="delItem"><input type="checkbox" [(ngModel)]="item.checked" ></td>
-      <td *ngIf="item" [ngSwitch]="item.priority">
+  <ul class="list__item heading">
+    <li class="item__heading item__priority">приоритет</li>
+    <li class="item__heading item__title">название</li>
+    <li class="item__heading item__description">описание</li>
+    <li *ngIf="delItem" class="item__heading item__checked">выбрать</li>
+    <li class="item__heading item__estimate">цена</li>
+    <li class="item__heading item__create_date">дата</li>
+    <li class="item__heading item__state">статус</li>
+  </ul>
+  <table class="list list-shadow">
+    <tr class="list__item " *ngFor="let item of listItem;" [ngClass]= "{'backgroundGreen': item.id%2===0}">
+      <td class=" item item__priority" *ngIf="item" [ngSwitch]="item.priority">
         <ng-template ngSwitchCase="0">Низкий</ng-template>
         <ng-template ngSwitchCase="10">Средний</ng-template>
         <ng-template ngSwitchCase="20">Высокий</ng-template>
       </td>
-      <td *ngIf="item">{{item.title}}</td>
-      <td *ngIf="item">{{item.description}}</td>
-      <td *ngIf="item">{{item.estimate}}</td>
-      <td *ngIf="item">{{item.create_date | date:'y-M-d'}} <br> {{item.create_date | date:'hh:mm:ss'}}</td>
-      <td *ngIf="item" [ngSwitch]="item.state">
+      <td class=" item item__title" *ngIf="item">{{item.title}}</td>
+      <td class=" item item__description" *ngIf="item">{{item.description}}</td>
+      <td class=" item item__checked" *ngIf="delItem"><input type="checkbox" [(ngModel)]="item.checked" ></td>
+      <td class=" item item__estimate" *ngIf="item">{{item.estimate}}</td>
+      <td class=" item item__create_date" *ngIf="item"> <p>{{item.create_date | date:'y-MM-d'}}</p> <p>{{item.create_date | date:'hh:mm:ss'}}</p></td>
+      <td class=" item item__state" *ngIf="item" [ngSwitch]="item.state">
         <select name="limit" [(ngModel)]="item.state" (click)="newStatus();">
           <option [value]="0" >Новая</option>
           <option [value]="10">работе</option>
@@ -42,21 +46,25 @@
     </tr>
   </table>
 
-  <input type="submit" value="prev" (click)="prevPage()" [disabled]="firstPage()">
-  <span>{{page}}</span>
-  <input type="submit" value="next" (click)="nextPage()"  [disabled]="lastPage()">
-    <select name="limit" [(ngModel)]="limit" (click)="getListItem()">
-      <option [value]="5">5</option>
-      <option [value]="10">10</option>
-      <option [value]="25">25</option>
-    </select>
 
 
   <div class="controlbar">
-  <button type="button" class="btn btn-primary" (click)="this.popupService.openModalWithComponent()">Добавить</button>
-    <button type="button" (click)="delItem = !delItem" *ngIf="!delItem">выбрать</button>
-    <button type="button" (click)="delItem = !delItem" *ngIf="delItem">отмена</button>
-    <button type="button" (click)="del()" *ngIf="delItem">удалить2</button>
+    <div class="option">
+      <label class="option__limit">кол-во записей :
+        <select name="limit" [(ngModel)]="limit" (click)="getListItem()">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="25">25</option>
+        </select>
+      </label>
+      <div class="option__page">
+        <button class="arrow" (click)="prevPage()"*ngIf="page!==1"><img class="arrow__icon arrow__icon-prev" src="../assets/img/iconmonstr-arrow-10.svg">last</button>
+        <span class="option__page-mrgn10">{{page}}</span>
+        <button class="arrow" (click)="nextPage()" *ngIf="page !== lastPage">next <img class="arrow__icon" src="../assets/img/iconmonstr-arrow-10.svg"></button>
+      </div>
+
+    </div>
+
   </div>
 </div>
 

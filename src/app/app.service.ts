@@ -12,18 +12,21 @@ export class AppService {
   messages = [];
   listItem = [];
   page;
-  limit:number;
+  limit:number =5 ;
+  lastPage;
 
   addItem(items){
     this.messages.unshift(items);
     this.setData(this.messages);
   }
   setData(data){
-    this.http.put('./data/data.service.ts', data );
+    console.log('отправка на сервер' , data);
+    // this.http.put('./data/data.service.ts', data );
   }
   getData(page , limit){
     this.messages = this.dataService.listDate;
     this.dataAddId();
+    this.lastPage = Math.ceil(this.messages.length / this.limit);
     return this.getListItem(page, limit);
   };
   dataAddId() {
@@ -52,14 +55,6 @@ export class AppService {
     return this.getListItem( page, this.limit);
   }
 
-  firstPage() {
-    return this.page === 1 ? true : false;
-  }
-
-  lastPage() {
-    let lastPage = Math.ceil(this.messages.length/this.limit);
-    return this.page === lastPage ? true : false ;
-  }
 
   delItem(){
     this.messages.forEach( message => {
@@ -71,7 +66,11 @@ export class AppService {
     this.setData(this.messages);
     return this.getListItem( this.page , this.limit);
   }
+
   newStatus(){
     this.setData(this.messages);
   };
+  numLastPage(){
+    return this.lastPage;
+  }
 }

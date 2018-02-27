@@ -1,0 +1,197 @@
+@font-face {
+  font-family: Nairi;
+  src: url("../assets/fonts/nairi.otf ");
+}
+.body{
+  margin: 100px;
+  width: 1024px;
+  height: 768px;
+  background:linear-gradient(180deg, #bfc2c3, #9294a4);
+  padding: 30px;
+  font-family: Calibri;
+}
+
+.list{
+  width: 100%;
+  height: calc( 100% - 150px );
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: #ffffff;
+  border-collapse: collapse;
+  overflow-y: auto;
+  &__item{
+    display: flex;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+  }
+  &-shadow{
+     box-shadow: 0 -3px 10px -3px #505050;
+   }
+}
+.heading{
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+.item{
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 20px;
+  max-width: none;
+  padding: 8px 10px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  box-sizing: border-box;
+  &__heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0 15px;
+    border-right: 2px solid #3e3e3e;
+    text-transform: capitalize;
+    font-family: Nairi;
+    letter-spacing: 1.1px;
+  }
+  &__checked{
+    text-align: center;
+    justify-content: center;
+    width:90px;
+    padding: 0;
+    font-size: 15px;
+  }
+  &__priority{
+    justify-content: center;
+    width: 120px;
+  }
+  &__title{
+    width: 180px;
+  }
+  &__description{
+    align-items: flex-start;
+    flex-basis: 100%;
+    flex-shrink: 1;
+    overflow: auto;
+  }
+  &__estimate{
+    justify-content: center;
+    width: 90px;
+  }
+  &__create_date{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    padding: 0 8px;
+    p{
+      padding: 0;
+      margin: 0;}
+  }
+  &__state{
+    width: 130px;
+  }
+}
+.backgroundGreen{
+  background: #e3e3e3;
+}
+.controlbar{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background: #e3e3e3;
+  padding: 10px;
+}
+.option{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  &__limit{
+    position: absolute;
+    left: 50px;
+  }
+  &__page{
+    &-mrgn10{
+      margin: 10px;
+    }
+  }
+}
+
+:host >>> .modal-content{
+  height: 576px!important;
+  width: 768px!important;
+  background: green!important;
+}
+:host >>> .popover-arrow.arrow{
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  width: 6px;
+  background-color: rgba(236, 232, 221, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  background-color: rgba(116,116,116,0.3);
+  box-shadow:0 1px 1px #fff inset;
+}
+
+::-webkit-resizer{
+  width:5px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+  width: 7px;
+}
+.menu{
+  display: flex;
+  align-items: center;
+}
+.menu__tbn{
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  line-height: 30px;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 2px;
+  text-transform: capitalize;
+  margin: 10px;
+}
+.btn__add{
+  @extend .menu__tbn;
+  height: 40px;
+}
+.btn__add-img{
+  margin-left: 5px;
+  height: 18px;
+  width: 18px;
+}
+.nav__btn{
+  @extend .menu__tbn;
+  height: 30px;
+  font-size: 18px;
+}
+.arrow{
+  font-size: 18px;
+  font-family: Arial;
+  border: none;
+  background: none;
+  &__icon{
+    height: 16px;
+    margin: 0 10px;
+    &-prev{
+      transform: rotate( 180deg );
+    }
+  }
+}

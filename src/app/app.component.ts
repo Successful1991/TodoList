@@ -5,7 +5,7 @@ import {AppService} from "./app.service";
 @Component ({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
 
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   limit:number = 5;
   listItem = [];
   delItem:boolean = false;
+  lastPage:number ;
 
   constructor(public popupService:PopupService,
               private appService:AppService
@@ -20,26 +21,22 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.listItem = this.appService.getData( this.page , this.limit);
+    this.numLastPage();
   }
   getListItem(){
     this.page = 1;
     this.listItem = this.appService.getListItem(this.page, this.limit);
+
   }
   nextPage(){
     this.page +=1;
     this.listItem = this.appService.nextPage(this.page);
+    this.numLastPage();
   }
 
   prevPage(){
     this.page -=1;
     this.listItem = this.appService.prevPage(this.page);
-  }
-
-  firstPage() {
-    return this.appService.firstPage();
-  }
-  lastPage() {
-    return this.appService.lastPage();
   }
 
   del(){
@@ -48,6 +45,9 @@ export class AppComponent implements OnInit{
   newStatus(){
     this.appService.newStatus();
   };
+  numLastPage(){
+    this.lastPage = this.appService.numLastPage();
+  }
 }
 
 
